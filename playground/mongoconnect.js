@@ -2,8 +2,7 @@
 
 const { MongoClient, ObjectID } = require('mongodb');
 
-var obj = new ObjectID();
-console.log(obj);
+
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 
     if (err) {
@@ -24,7 +23,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     }
     // })
 
-    // Insert new doc into Users (name, age, location)
+    // this code is for learning
 
     // database.collection('Users').insertOne({
     //     Name: 'Ahmed A. Alshammary',
@@ -37,6 +36,6 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     console.log(result.ops[0]._id.getTimestamp());
     // })
 
-    db.close();
-    console.log('Successfuly exiting the database');
+    // db.close();
+    // console.log('Successfuly exiting the database');
 });
