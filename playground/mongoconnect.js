@@ -12,19 +12,9 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     const database = db.db('Users') // i was missing this Argument
     console.log('Connected to MongoDB server');
 
-    // data.collection('Todos').insertOne({
-    //     text: 'Something to do',
-    //     completed: false
-    // }, (err, result) => {
-    //     if (err) {
-    //         return console.log('Unable to insert todo', err);
-    //     } else {
-    //         console.log(JSON.stringify(result.ops, undefined, 2));
-    //     }
-    // })
-
+    // insert data to a collection
     // this code is for learning
-
+    //
     // database.collection('Users').insertOne({
     //     Name: 'Ahmed A. Alshammary',
     //     Age: 23,
@@ -35,7 +25,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     }
     //     console.log(result.ops[0]._id.getTimestamp());
     // })
-
+    // closing the database
     // db.close();
     // console.log('Successfuly exiting the database');
 });

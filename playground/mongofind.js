@@ -7,9 +7,10 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
         return console.log('Unable to connect to MongoDB server');
     }
 
-    // const database = db.db('Users') // i was missing this Argument
-    // console.log('Connected to MongoDB server');
+    const database = db.db('Users') // i was missing this Argument
+    console.log('Connected to MongoDB server');
 
+    // to find number of collections in the database
     // database.collection('Users').find({ Name: 'Ahmed A. Alshammary' }).count().then((count) => {
     //     console.log(`the users count: ${count}`);
     // }, (err) => {
@@ -18,7 +19,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     }
     // })
 
-    //this code is not rubish it is the basics 
+    // to find a collection in the database
 
     // database.collection('Users').find({ Name: 'Ahmed A. Alshammary' }).toArray().then((docs) => {
     //     console.log('the users');
@@ -29,6 +30,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
     //     }
     // })
 
+    // closeing the database
     // db.close();
     // console.log('Successfuly exiting the database');
 });
