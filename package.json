@@ -1,15 +1,22 @@
 {
-  "name": "towork-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Ahmed A. Alshammry",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "mongodb": "^3.1.1",
-    "mongoose": "^5.2.3"
-  }
+    "name": "towork-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha server/**/*.test.js",
+        "test-watch": "nodemon --exec 'npm test'"
+    },
+    "author": "Ahmed A. Alshammry",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "expect": "^23.4.0",
+        "express": "^4.16.3",
+        "mocha": "^5.2.0",
+        "mongodb": "^3.1.1",
+        "mongoose": "^5.2.3",
+        "nodemon": "^1.18.1",
+        "supertest": "^3.1.0"
+    }
 }

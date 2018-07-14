@@ -1,43 +1,29 @@
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise; //global promise identfier
-mongoose.connect('mongodb://localhost:27017/TodoApp'); //connect to the database
+var express = require('express');
+var bodyParser = require('body-parser');
+
+var { mongoose } = require('./db/mongoose');
+var { Todo } = require('./models/Todo');
+var { Users } = require('./models/Users');
+
+var app = express();
+
+app.use(bodyParser.json());
 
 
-// var Todo = mongoose.model('Todo', { //verfing model to the mongoose
-//     text: {
-//         type: String,
-//         required: true, // the property most be filled
-//         minlength: 8, // minimum length to the property
-//         trim: true // triming the begning of the property value to minimize space and make sure that the message is not empty
-//     },
-//     completed: {
-//         type: Boolean,
-//         default: false // the default value for the property
-//     },
-//     completedAt: {
-//         type: Number,
-//         default: null
-//     }
-// });
 
-// var data = new Todo({ //constract the data from the todo model
-//     text: '     save the day    '
-// });
+app.post('/todos', (req, res) => { //connect to the url and read the post from the source
+    var todo = new Todo({
+        text: req.body.text, // reading the text in the post 
+    });
+    todo.save().then((doc) => {
+        res.status(200).send(doc); // send status 200 and the data when the database worked successfully
+    }, (e) => {
+        res.status(400).send(e); // send the error status when there is a wrong post state
+    });
+});
 
-// data.save().then((doc) => { //saving the data
-//     console.log('the Data that you saved', doc);
-// }, (e) => {
-//     console.log('Unable to save the data to the database')
-// });
+app.listen(3000, () => {
+    console.log('Server up and running on port 3000');
+});
 
-// var data = new Todo({ //the save for one property of the mongoose model
-//     text: 'Learned mongoose',
-//     completed: true,
-//     completedAt: 0537
-// });
-
-// data.save().then((doc) => { // the saving for the new full model of the mongoose
-//     console.log('The data that you saved is', doc);
-// }, (e) => {
-//     console.log('Unable to save data', e);
-// });
+module.exports = { app };
