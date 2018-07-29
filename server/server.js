@@ -22,6 +22,14 @@ app.post('/todos', (req, res) => { //connect to the url and read the post from t
     });
 });
 
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({ todos }); // using an obj to add more properties to the obj after sending it
+    }, (e) => {
+        res.status(400).send(e);
+    })
+});
+
 app.listen(3000, () => {
     console.log('Server up and running on port 3000');
 });
