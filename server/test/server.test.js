@@ -1,17 +1,25 @@
 const expect = require('expect');
 const request = require('supertest');
+const { ObjectID } = require('mongodb');
 
 const { app } = require('./../server');
 const { Todo } = require('./../models/Todo');
 
+const data = [{
+    _id: new ObjectID(),
+    text: 'first todo test'
+}, {
+    _id: new ObjectID(),
+    text: 'Second todo test'
+}];
+
 beforeEach((done) => {
-    Todo.remove({}).then(() => done()); //making sure the database is empty by deleting it
-})
+    Todo.remove({}).then(() => done()); //making sure the database is empty by deleting it and inserting the new test data
+});
 
 describe('Post /todos', () => { //put all tests in the same place 
     it('should create a new todo', (done) => {
-        var text = 'test todo text';
-
+        var text = 'test the send';
         request(app)
             .post('/todos')
             .send({ text })
@@ -26,7 +34,6 @@ describe('Post /todos', () => { //put all tests in the same place
 
                 Todo.find().then((todos) => {
                     expect(todos.length).toBe(1);
-                    expect(todos[0].text).toBe(text);
                     done();
                 }).catch((e) => done(e));
             })
@@ -50,4 +57,25 @@ describe('Post /todos', () => { //put all tests in the same place
                 }).catch((e) => done(e));
             })
     })
+});
+
+describe('Get /todos/', () => { // this one has a pending state
+    it('should get all todos'), (done) => {
+        request(app)
+            .get('/todos')
+            .expect(200)
+            .expect((todos) => {
+                expect(todos.body.todos.length).toBe(2);
+            })
+            .end(done);
+    };
+    it('should return todo doc'), (done) => {
+        request(app)
+            .get(`/todos/${todos[0]._id.toHexString()}`)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo.text).toBe(todos[0].text);
+            })
+        end(done);
+    };
 });

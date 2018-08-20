@@ -28,27 +28,24 @@ app.get('/todos', (req, res) => {
         res.send({ todos }); // using an obj to add more properties to the obj after sending it
     }, (e) => {
         res.status(400).send(e);
-    })
+    });
 });
 
 app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
-
     if (!ObjectID.isValid(id)) {
         return res.status(404).send();
+    } else if (ObjectID.isValid(id)) {
+        Todo.findById(id).then((todo) => {
+            if (todo) {
+                res.status(200).send(todo);
+            } else if (!todo) {
+                res.status(200).send({ todos });
+            }
+        }).catch((e) => { res.status(400).send(e); });
     }
-
-    Todo.findById(id).then((todo) => {
-        if (todo) {
-            return res.status(200).send(todo);
-        }
-        if (!todo) {
-            return res.status(404).send();
-        }
-
-    }).catch((e) => { res.status(400).send(); });
-
 });
+
 
 app.listen(3000, () => {
     console.log('Server up and running on port 3000');
