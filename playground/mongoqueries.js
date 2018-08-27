@@ -1,7 +1,7 @@
 const { mongoose } = require('./../server/db/mongoose');
 const { Todo } = require('./../server/models/Todo');
 const { ObjectID } = require('mongodb');
-var id = '5b5daefaa5d39c1b2744bf2311'; // this id is fore quering 
+var id = '5b5daefaa5d39c1b2744bf2311'; // this id is for quering 
 
 if (!ObjectID.isValid(id)) {
     console.log('Id is not valid')
