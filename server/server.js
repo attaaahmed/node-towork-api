@@ -42,7 +42,7 @@ app.get('/todos/:id', (req, res) => { // finding the item by ID
     } else if (ObjectID.isValid(id)) { 
         Todo.findById(id).then((todo) => {
             if (todo) {
-                res.status(200).send(todo);
+                res.status(200).send({todo});
             } else if (!todo) {
                 res.status(404).send();
             }
@@ -58,7 +58,7 @@ return res.status(400).send();
 } else if (ObjectID.isValid(id)){
     Todo.findByIdAndRemove(id).then((todo) => {
         if (todo) {
-            res.status(200).send(todo);
+            res.status(200).send({todo});
         } else if (!todo) {
             res.status(404).send();
         }
