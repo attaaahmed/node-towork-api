@@ -1,9 +1,9 @@
-const expect = require('expect');
-const request = require('supertest');
-const { ObjectID } = require('mongodb');
+const expect = require('expect');   // except npm 3rd party modual
+const request = require('supertest');  //npm 3rd party modual
+const { ObjectID } = require('mongodb');  // defining the id property to the data base
 
-const { app } = require('./../server');
-const { Todo } = require('./../models/Todo');
+const { app } = require('./../server');    // aquiring the app from the server
+const { Todo } = require('./../models/Todo'); // aurirng the model for the Todo item
 
 const todos = [{
     _id: new ObjectID(),
@@ -11,16 +11,16 @@ const todos = [{
 }, {
     _id: new ObjectID(),
     text: 'Second todo test'
-}];
+}];   // data to be inserted to the data base
 
 beforeEach((done) => {
     Todo.remove({}).then(() => {
       return Todo.insertMany(todos);
     }).then(() => done());
-  });
+  });  // async test init
 
-describe('Post /todos', () => { 
-    it('should create a new todo', (done) => {
+describe('Post /todos', () => {   // test to the post
+    it('should create a new todo', (done) => {  // testing the create
         var text = 'test the send';
         request(app)
             .post('/todos')
@@ -29,7 +29,7 @@ describe('Post /todos', () => {
             .expect((res) => {
                 expect(res.body.text).toBe(text);
             })
-            .end((err, res) => {
+            .end((err, res) => {  // handling the error
                 if (err) {
                     return done(err);
                 }
@@ -48,7 +48,7 @@ describe('Post /todos', () => {
             .expect((res) => {
                 expect(res.body.text).toBe(undefined);
             })
-            .end((err, res) => {
+            .end((err, res) => { // hanelling the error
                 if (err) {
                     return done(err);
                 }
@@ -61,7 +61,7 @@ describe('Post /todos', () => {
     })
 });
 
-describe('GET /todos', () => {
+describe('GET /todos', () => {  //testing the get 
     it('should get all todos', (done) => {
       request(app)
         .get('/todos')
